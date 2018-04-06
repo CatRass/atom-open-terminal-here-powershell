@@ -37,13 +37,24 @@ open = (filepath) ->
     dirpath = getRootDir()
   else
     fs = require('fs')
-    if fs.lstatSync(fs.realpathSync(filepath)).isFile()
+    try
+      isFile = fs.lstatSync(fs.realpathSync(filepath)).isFile()
+    catch
+      isFile = true
+    if isFile
       dirpath = require('path').dirname(filepath)
     else
       dirpath = filepath
   return if not dirpath
   command = atom.config.get 'open-terminal-here.command'
-  require('child_process').exec command, cwd: dirpath, env: filterProcessEnv()
+  try
+    require('child_process').exec command, cwd: dirpath, env: filterProcessEnv()
+  catch error
+    if error.code is 'EACCES'
+      message = 'Permission denied to open Terminal at ' + dirpath
+      atom.notifications.addError message, {dismissable: true}
+    else
+      throw error
 
 switch require('os').platform()
   when 'darwin'

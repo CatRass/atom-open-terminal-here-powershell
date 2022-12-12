@@ -1,8 +1,8 @@
 ###
- * Open Terminal Here - Atom package
- * https://github.com/blueimp/atom-open-terminal-here
+ * Open Terminal Here Powershell - Atom package modification
+ * https://github.com/CatRass/atom-open-terminal-here-powershell
  *
- * Copyright 2015, Sebastian Tschan
+ * Original Extension Copyright 2015, Sebastian Tschan
  * https://blueimp.net
  *
  * Licensed under the MIT license:
@@ -60,7 +60,12 @@ switch require('os').platform()
   when 'darwin'
     defaultCommand = 'open -a Terminal.app "$PWD"'
   when 'win32'
-    defaultCommand = 'start /D "%cd%" cmd'
+    path = "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
+    fs = require('fs')
+    if (fs.existsSync(path))
+      defaultCommand = 'start /D "%cd%" powershell'; # cmd has been replaced by powershell
+    else
+      defaultCommand = 'start /D "%cd%" cmd'; # run cmd if powershell fails
   else
     defaultCommand = 'x-terminal-emulator'
 

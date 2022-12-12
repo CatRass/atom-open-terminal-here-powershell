@@ -1,7 +1,9 @@
-# Open Terminal Here
+# Open Terminal Here (With Powershell)
 
 Open the Terminal (Mac OS X, Linux) or Command Prompt (Windows)
 in the given directory via context menu or keyboard shortcut.
+
+This package is exactly the same as the original [open-terminal-here][6], with the exception that it now supports both Windows CMD and Powershell.
 
 ![Screenshot of the "Open Terminal Here" menu item displayed][1]
 
@@ -53,3 +55,4 @@ Linux    | `ctrl-alt-shift-t`
 [3]: https://github.com/blueimp/atom-open-terminal-here/blob/master/terminal-tab.scpt
 [4]: http://www.semicomplete.com/projects/xdotool/
 [5]: https://raw.githubusercontent.com/blueimp/atom-open-terminal-here/master/terminal-tab.sh
+[6]: https://github.com/blueimp/atom-open-terminal-here
